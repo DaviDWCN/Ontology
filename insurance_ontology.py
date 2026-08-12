@@ -7,7 +7,7 @@ Author: Knowledge Engineering Team
 from __future__ import annotations
 from enum import Enum
 from typing import List, Optional, Dict, Any, Union
-from pydantic import BaseModel, Field, ConfigDict
+from pydantic import BaseModel, Field, ConfigDict, field_validator
 
 
 # ==========================================
@@ -84,6 +84,27 @@ class FinancialRule(OntologyBaseNode):
     deductible_rate: float = Field(default=0.0, description="免赔比例 (0.0-1.0)")
     payout_ratio: float = Field(default=1.0, description="赔付比例/不足额投保比例 (0.0-1.0)")
     rule_logic_expr: Optional[str] = Field(None, description="伪代码/表达式，如 MAX(5000, Loss * 0.1)")
+
+    @field_validator("deductible_amount")
+    @classmethod
+    def validate_deductible_amount(cls, v: float) -> float:
+        if v < 0.0:
+            raise ValueError("deductible_amount cannot be negative")
+        return v
+
+    @field_validator("deductible_rate")
+    @classmethod
+    def validate_deductible_rate(cls, v: float) -> float:
+        if not (0.0 <= v <= 1.0):
+            raise ValueError("deductible_rate must be between 0.0 and 1.0 inclusive")
+        return v
+
+    @field_validator("payout_ratio")
+    @classmethod
+    def validate_payout_ratio(cls, v: float) -> float:
+        if not (0.0 <= v <= 1.0):
+            raise ValueError("payout_ratio must be between 0.0 and 1.0 inclusive")
+        return v
 
 
 class SpecialClause(OntologyBaseNode):
