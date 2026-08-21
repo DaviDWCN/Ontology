@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d5" for="edge" attr.name="rel_type" attr.type="string" />
+  <key id="d4" for="node" attr.name="limit" attr.type="string" />
+  <key id="d3" for="node" attr.name="text" attr.type="string" />
+  <key id="d2" for="node" attr.name="clause_number" attr.type="string" />
+  <key id="d1" for="node" attr.name="label" attr.type="string" />
+  <key id="d0" for="node" attr.name="name" attr.type="string" />
+  <graph edgedefault="directed">
+    <node id="prod_zhongji_2025">
+      <data key="d0">某重疾险2025</data>
+      <data key="d1">Product</data>
+    </node>
+    <node id="c_3_2_1">
+      <data key="d0">重大疾病保险金</data>
+      <data key="d2">3.2.1</data>
+      <data key="d3">若被保险人初次确诊患有本合同约定的重大疾病，我们将给付重大疾病保险金...</data>
+      <data key="d1">Clause</data>
+    </node>
+    <node id="cov_cancer">
+      <data key="d0">恶性肿瘤-重度</data>
+      <data key="d4">1000000</data>
+      <data key="d1">Coverage</data>
+    </node>
+    <node id="exc_carcinoma_in_situ">
+      <data key="d0">原位癌</data>
+      <data key="d1">Exclusion</data>
+    </node>
+    <node id="exc_pre_existing">
+      <data key="d0">既往症</data>
+      <data key="d1">Exclusion</data>
+    </node>
+    <node id="dis_cancer_C80">
+      <data key="d0">恶性肿瘤-重度(C80)</data>
+      <data key="d1">Disease</data>
+    </node>
+    <edge source="prod_zhongji_2025" target="c_3_2_1" id="HAS_CLAUSE">
+      <data key="d5">HAS_CLAUSE</data>
+    </edge>
+    <edge source="c_3_2_1" target="cov_cancer" id="DEFINES">
+      <data key="d5">DEFINES</data>
+    </edge>
+    <edge source="cov_cancer" target="exc_carcinoma_in_situ" id="EXCLUDES">
+      <data key="d5">EXCLUDES</data>
+    </edge>
+    <edge source="cov_cancer" target="exc_pre_existing" id="EXCLUDES">
+      <data key="d5">EXCLUDES</data>
+    </edge>
+    <edge source="dis_cancer_C80" target="cov_cancer" id="APPLIES_TO">
+      <data key="d5">APPLIES_TO</data>
+    </edge>
+  </graph>
+</graphml>
